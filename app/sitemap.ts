@@ -1,8 +1,8 @@
-import { MetadataRoute } from 'next'
+import { type MetadataRoute } from 'next'
+import { APP_CONFIG } from '@/lib/config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    // Update this to your deployed domain
-    const baseUrl = 'https://your-domain.com'
+    const baseUrl = APP_CONFIG.domain
 
     return [
         {

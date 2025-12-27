@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import { APP_CONFIG } from "@/lib/config";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,10 +24,11 @@ export const metadata: Metadata = {
   authors: [{ name: "dev-yash", url: "https://github.com/dev-Yashwant" }],
   creator: "dev-yash",
   publisher: "dev-yash",
+  metadataBase: new URL(APP_CONFIG.domain),
   openGraph: {
     title: "Free TOTP Generator | Secure 2FA Authenticator App",
     description: "Generate 2FA tokens instantly and securely in your browser. No data leaves your device.",
-    url: "https://totp.danhersam.com", // Keeping inspiration URL as placeholder or just generic
+    url: APP_CONFIG.domain,
     siteName: "TOTP Generator",
     locale: "en_US",
     type: "website",

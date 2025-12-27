@@ -1,4 +1,5 @@
-import { MetadataRoute } from 'next'
+import { type MetadataRoute } from 'next'
+import { APP_CONFIG } from '@/lib/config'
 
 export default function robots(): MetadataRoute.Robots {
     return {
@@ -6,7 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: '/',
         },
-        // Update this to your deployed domain in the future
-        sitemap: 'https://your-domain.com/sitemap.xml',
+        sitemap: `${APP_CONFIG.domain}/sitemap.xml`,
     }
 }
