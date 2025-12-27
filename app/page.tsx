@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { TotpDisplay } from "@/components/TotpDisplay";
 import { cn } from "@/lib/utils";
-import { Settings, Key, Hash, Clock as ClockIcon, ShieldCheck, ChevronDown, ChevronUp } from "lucide-react";
+import { Settings, Key, Hash, Clock as ClockIcon, ShieldCheck, ChevronDown, ChevronUp, Clipboard } from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { translations, Language } from "@/lib/i18n";
 
@@ -57,6 +57,15 @@ function TotpApp() {
       </div>
     );
   }
+
+  const handlePaste = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text) setSecret(text);
+    } catch (err) {
+      console.error('Failed to read clipboard', err);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8">
@@ -125,8 +134,15 @@ function TotpApp() {
                     value={secret}
                     onChange={(e) => setSecret(e.target.value)}
                     placeholder="JBSWY3DPEHPK3PXP..."
-                    className="w-full glass-input pl-10 pr-4 py-3 rounded-xl text-sm font-mono placeholder:text-muted-foreground/50"
+                    className="w-full glass-input pl-10 pr-10 py-3 rounded-xl text-sm font-mono placeholder:text-muted-foreground/50"
                   />
+                  <button
+                    onClick={handlePaste}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 hover:bg-white/10 rounded-lg text-muted-foreground hover:text-primary transition-all"
+                    title="Paste from clipboard"
+                  >
+                    <Clipboard className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
 
@@ -173,9 +189,9 @@ function TotpApp() {
         )}
       </main>
 
-      <footer className="fixed bottom-4 text-center text-xs text-muted-foreground/50 w-full px-4">
-        <p>
-          {t.footerCredit} <a href="https://github.com/dev-Yashwant" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors underline decoration-primary/30 underline-offset-4">dev-yash</a>
+      <footer className="fixed bottom-4 text-center text-xs w-full px-4">
+        <p className="text-white/60 drop-shadow-[0_0_5px_rgba(255,255,255,0.3)] hover:text-white/90 transition-colors duration-300">
+          Prompted by <a href="https://github.com/dev-Yashwant" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:text-indigo-400 hover:drop-shadow-[0_0_8px_rgba(129,140,248,0.5)] transition-all underline decoration-primary/30 underline-offset-4">dev-yash</a> made with <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 animate-pulse">Anti Gravity</span>
         </p>
       </footer>
     </div>
