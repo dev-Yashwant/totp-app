@@ -2,6 +2,8 @@
 
 A secure, client-side Time-based One-Time Password (TOTP) generator built with Next.js, Tailwind CSS, and a premium Glassmorphism design. Inspired by `totp.danhersam.com` but reimagined with a modern "wow" factor.
 
+<img width="1440" height="812" alt="image" src="https://github.com/user-attachments/assets/22dcc1c1-67e1-4e57-b2a6-85ab7cd88691" />
+
 ## Features
 
 - 🔐 **Secure**: All generation happens client-side. No keys are ever sent to a server.
